@@ -11,3 +11,7 @@ type Student {
 type Query {
   students: [Student!]!
 }
+
+type Mutation {
+  createStudent(name: String!, age: Float!): Student!
+}
