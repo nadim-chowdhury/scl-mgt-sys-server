@@ -1,0 +1,13 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Student {
+  id: Float!
+  name: String!
+  age: Float!
+}
+
+type Query {
+  students: [Student!]!
+}
