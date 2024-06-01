@@ -8,10 +8,20 @@ type Student {
   age: Float!
 }
 
+type User {
+  id: Int!
+  name: String!
+  role: String!
+  email: String!
+  password: String!
+}
+
 type Query {
   students: [Student!]!
 }
 
 type Mutation {
+  register(name: String!, email: String!, role: String!, password: String!): User!
+  login(email: String!, password: String!): String!
   createStudent(name: String!, age: Float!): Student!
 }
