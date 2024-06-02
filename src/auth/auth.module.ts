@@ -1,4 +1,3 @@
-// src/auth/auth.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
@@ -19,8 +18,4 @@ import { User } from './user.entity';
   providers: [AuthService, AuthResolver],
   exports: [AuthService],
 })
-export class AuthModule {
-  constructor() {
-    console.log('JWT Secret:', process.env.JWT_SECRET);
-  }
-}
+export class AuthModule {}

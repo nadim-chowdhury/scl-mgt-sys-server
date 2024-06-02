@@ -34,13 +34,18 @@ export class AuthService {
     email: string,
     password: string,
   ): Promise<{ accessToken: string }> {
+    const secretKey = process.env.JWT_SECRET;
+    if (!secretKey) {
+      throw new Error('JWT secret key is not defined');
+    }
+
     const user = await this.usersRepository.findOne({ where: { email } });
     if (!user || !(await bcrypt.compare(password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
     }
 
     const payload: JwtPayload = { email: user.email, sub: user.id };
-    const accessToken = this.jwtService.sign(payload);
+    const accessToken = this.jwtService.sign(payload, { secret: secretKey });
     return { accessToken };
   }
 }
