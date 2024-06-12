@@ -21,7 +21,7 @@ import { User } from './auth/user.entity';
       port: 5432,
       username: 'postgres',
       password: null,
-      database: 'ACER',
+      // database: 'ACER',
       entities: [User],
       synchronize: true,
     }),
