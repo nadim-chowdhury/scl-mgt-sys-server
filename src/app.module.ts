@@ -10,9 +10,13 @@ import { AuthModule } from './auth/auth.module';
 // import { User } from './auth/user.entity';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),

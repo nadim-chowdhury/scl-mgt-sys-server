@@ -3,14 +3,14 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { User } from './user.entity';
+import { AuthUser } from './auth-user.entity';
 import { JwtPayload } from './jwt-payload.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
+    @InjectRepository(AuthUser)
+    private usersRepository: Repository<AuthUser>,
     private jwtService: JwtService,
   ) {}
 
@@ -19,7 +19,7 @@ export class AuthService {
     email: string,
     role: string,
     password: string,
-  ): Promise<User> {
+  ): Promise<AuthUser> {
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = this.usersRepository.create({
       name,
