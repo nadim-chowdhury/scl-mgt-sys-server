@@ -33,7 +33,15 @@ export class AuthService {
   async login(
     email: string,
     password: string,
-  ): Promise<{ accessToken: string }> {
+  ): Promise<{
+    accessToken: string;
+    user: {
+      id: number;
+      name: string;
+      email: string;
+      role: string;
+    };
+  }> {
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new Error('JWT secret key is not defined');
@@ -46,6 +54,15 @@ export class AuthService {
 
     const payload: JwtPayload = { email: user.email, sub: user.id };
     const accessToken = this.jwtService.sign(payload, { secret: secretKey });
-    return { accessToken };
+
+    return {
+      accessToken,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      },
+    };
   }
 }
