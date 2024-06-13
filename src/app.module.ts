@@ -7,7 +7,9 @@ import { StudentModule } from './students/student.module';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
-import { User } from './auth/user.entity';
+// import { User } from './auth/user.entity';
+import { UserModule } from './user/user.module';
+import { User } from './user/user.entity';
 
 @Module({
   imports: [
@@ -28,6 +30,7 @@ import { User } from './auth/user.entity';
     }),
     AuthModule,
     StudentModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
