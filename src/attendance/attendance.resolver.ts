@@ -1,23 +1,21 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query } from '@nestjs/graphql';
 import { AttendanceService } from './attendance.service';
 import { Attendance } from './attendance.entity';
 
 @Resolver(() => Attendance)
 export class AttendanceResolver {
-  constructor(private attendanceService: AttendanceService) {}
-
-  @Query(() => [Attendance])
-  async attendances() {
-    return this.attendanceService.findAll();
-  }
+  constructor(private readonly attendanceService: AttendanceService) {}
 
   @Mutation(() => Attendance)
-  async markAttendance(
-    @Args('classId') classId: number,
+  async createAttendance(
     @Args('studentId') studentId: number,
     @Args('date') date: string,
-    @Args('status') status: string,
-  ) {
-    return this.attendanceService.create(classId, studentId, date, status);
+  ): Promise<Attendance> {
+    return this.attendanceService.createAttendance(studentId, date);
+  }
+
+  @Query(() => [Attendance])
+  async attendances(): Promise<Attendance[]> {
+    return this.attendanceService.findAll();
   }
 }

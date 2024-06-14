@@ -11,14 +11,17 @@ export class ClassService {
   ) {}
 
   findAll(): Promise<Class[]> {
-    return this.classRepository.find();
+    return this.classRepository.find({ relations: ['teacher'] });
   }
 
-  findOne(id: any): Promise<Class> {
-    return this.classRepository.findOne(id);
+  findOne(id: number): Promise<Class> {
+    return this.classRepository.findOne({
+      where: { id },
+      relations: ['teacher'],
+    });
   }
 
-  create(name: string, teacherId: number): Promise<Class> {
+  async create(name: string, teacherId: number): Promise<Class> {
     const newClass = this.classRepository.create({
       name,
       teacher: { id: teacherId },

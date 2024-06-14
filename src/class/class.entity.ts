@@ -1,15 +1,19 @@
-import { Teacher } from 'src/teachers/teacher.entity';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-// import { Teacher } from './teacher.entity';
+import { Teacher } from '../teacher/teacher.entity';
 
+@ObjectType()
 @Entity()
 export class Class {
+  @Field(() => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field()
   @Column()
   name: string;
 
-  @ManyToOne(() => Teacher, (teacher: any) => teacher.classes)
+  @Field(() => Teacher)
+  @ManyToOne(() => Teacher, (teacher) => teacher.classes)
   teacher: Teacher;
 }

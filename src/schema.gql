@@ -2,12 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Student {
-  id: Float!
-  name: String!
-  age: Float!
-}
-
 type AuthUser {
   id: Int!
   name: String!
@@ -16,26 +10,93 @@ type AuthUser {
   password: String!
 }
 
+type Message {
+  id: Float!
+  sender: User!
+  receiver: User!
+  content: String!
+  timestamp: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: ID!
-  name: String!
+  username: String!
   password: String!
   role: String!
 }
 
+type Teacher {
+  id: Int!
+  username: String!
+  classes: [Class!]!
+}
+
+type Class {
+  id: Int!
+  name: String!
+  teacher: Teacher!
+}
+
+type Student {
+  id: Float!
+  name: String!
+  age: Float!
+  attendances: [Attendance!]!
+}
+
+type Attendance {
+  id: Float!
+  date: String!
+  student: Student!
+  studentId: Float!
+}
+
+type Subject {
+  id: Int!
+  name: String!
+  class: Class!
+}
+
+type Timetable {
+  id: Float!
+  class: Class!
+  subject: Subject!
+  day: String!
+  startTime: String!
+  endTime: String!
+}
+
 type Query {
-  students: [Student!]!
   profile(username: String!): User!
+  classes: [Class!]!
+  teachers: [Teacher!]!
+  teacher(id: Float!): Teacher!
+  students: [Student!]!
+  subjects: [Subject!]!
+  timetables: [Timetable!]!
+  attendances: [Attendance!]!
+  messages: [Message!]!
 }
 
 type Mutation {
   register(createUserInput: CreateUserInput!): User!
   login(loginInput: LoginInput!): String!
+  createClass(name: String!, teacherId: Float!): Class!
+  createTeacher(username: String!): Teacher!
   createStudent(name: String!, age: Float!): Student!
+  createSubject(name: String!, classId: Float!): Subject!
+  createTimetable(classId: Float!, subjectId: Float!, day: String!, startTime: String!, endTime: String!): Timetable!
+  createAttendance(studentId: Float!, date: String!): Attendance!
+  createMessage(senderId: Float!, receiverId: Float!, content: String!): Message!
 }
 
 input CreateUserInput {
-  name: String!
+  username: String!
   password: String!
   role: String!
 }

@@ -18,7 +18,7 @@ export class SubjectService {
     return this.subjectRepository.findOne(id);
   }
 
-  create(name: string, classId: number): Promise<Subject> {
+  async create(name: string, classId: number): Promise<Subject> {
     const newSubject = this.subjectRepository.create({
       name,
       class: { id: classId },

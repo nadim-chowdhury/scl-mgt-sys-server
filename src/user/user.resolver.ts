@@ -25,14 +25,14 @@ export class UserResolver {
     const { username, password } = loginInput;
     const user = await this.userService.validateUser(username, password);
     if (user) {
-      const payload = { username: user.name, sub: user.id };
+      const payload = { username: user.username, sub: user.id };
       return this.jwtService.sign(payload);
     }
     throw new Error('Invalid credentials');
   }
 
   @Query(() => User)
-  @UseGuards(GqlAuthGuard)
+  // @UseGuards(GqlAuthGuard)
   async profile(@Args('username') username: string): Promise<User | undefined> {
     return this.userService.findOne(username);
   }

@@ -9,9 +9,14 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 import { MessageService } from './message.service';
-import { Message } from './message.entity';
 
-@WebSocketGateway()
+@WebSocketGateway({
+  cors: {
+    origin: 'http://localhost:3001', // Replace with your client's origin
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+})
 export class MessageGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {

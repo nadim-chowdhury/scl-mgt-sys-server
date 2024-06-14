@@ -1,3 +1,4 @@
+import { Field, ObjectType } from '@nestjs/graphql';
 import { User } from 'src/user/user.entity';
 import {
   Entity,
@@ -6,22 +7,27 @@ import {
   ManyToOne,
   CreateDateColumn,
 } from 'typeorm';
-// import { User } from './user.entity';
 
+@ObjectType()
 @Entity()
 export class Message {
   @PrimaryGeneratedColumn()
+  @Field()
   id: number;
 
-  @ManyToOne(() => User, (user: any) => user.sentMessages)
+  @ManyToOne(() => User, (user) => user.sentMessages)
+  @Field(() => User)
   sender: User;
 
-  @ManyToOne(() => User, (user: any) => user.receivedMessages)
+  @ManyToOne(() => User, (user) => user.receivedMessages)
+  @Field(() => User)
   receiver: User;
 
   @Column()
+  @Field()
   content: string;
 
   @CreateDateColumn()
+  @Field()
   timestamp: Date;
 }

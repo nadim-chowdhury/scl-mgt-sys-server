@@ -1,5 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { Message } from 'src/message/message.entity';
 
 @ObjectType()
 @Entity()
@@ -10,7 +11,7 @@ export class User {
 
   @Field()
   @Column()
-  name: string;
+  username: string;
 
   @Field()
   @Column()
@@ -19,4 +20,10 @@ export class User {
   @Field()
   @Column()
   role: string;
+
+  @OneToMany(() => Message, (message) => message.sender)
+  sentMessages: Message[];
+
+  @OneToMany(() => Message, (message) => message.receiver)
+  receivedMessages: Message[];
 }
