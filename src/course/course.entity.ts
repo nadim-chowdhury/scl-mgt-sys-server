@@ -1,5 +1,6 @@
+import { Assignment } from 'src/assignment/assignment.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Assignment } from './assignment.entity';
+// import { Assignment } from './assignment.entity';
 
 @Entity()
 export class Course {
@@ -12,6 +13,6 @@ export class Course {
   @Column()
   description: string;
 
-  @OneToMany(() => Assignment, (assignment) => assignment.course)
+  @OneToMany(() => Assignment, (assignment: any) => assignment.course)
   assignments: Assignment[];
 }

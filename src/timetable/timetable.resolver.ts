@@ -19,6 +19,12 @@ export class TimetableResolver {
     @Args('startTime') startTime: string,
     @Args('endTime') endTime: string,
   ) {
-    return this.timetableService.create(classId, subjectId, day, startTime, endTime);
+    return this.timetableService.create(
+      classId,
+      subjectId,
+      day,
+      startTime,
+      endTime,
+    );
   }
 }

@@ -1,16 +1,18 @@
+import { Assignment } from 'src/assignment/assignment.entity';
+import { User } from 'src/user/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Assignment } from './assignment.entity';
-import { User } from './user.entity';
+// import { Assignment } from './assignment.entity';
+// import { User } from './user.entity';
 
 @Entity()
 export class Submission {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Assignment, (assignment) => assignment.submissions)
+  @ManyToOne(() => Assignment, (assignment: any) => assignment.submissions)
   assignment: Assignment;
 
-  @ManyToOne(() => User, (user) => user.submissions)
+  @ManyToOne(() => User, (user: any) => user.submissions)
   student: User;
 
   @Column()

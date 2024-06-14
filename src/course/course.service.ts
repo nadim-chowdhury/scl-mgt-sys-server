@@ -14,8 +14,9 @@ export class CourseService {
     return this.courseRepository.find({ relations: ['assignments'] });
   }
 
-  findOne(id: number): Promise<Course> {
-    return this.courseRepository.findOne(id, { relations: ['assignments'] });
+  findOne(id: any): Promise<Course> {
+    // return this.courseRepository.findOne(id, { relations: ['assignments'] });
+    return this.courseRepository.findOne(id);
   }
 
   create(name: string, description: string): Promise<Course> {

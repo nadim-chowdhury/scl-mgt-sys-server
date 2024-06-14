@@ -12,7 +12,10 @@ export class ClassResolver {
   }
 
   @Mutation(() => Class)
-  async createClass(@Args('name') name: string, @Args('teacherId') teacherId: number) {
+  async createClass(
+    @Args('name') name: string,
+    @Args('teacherId') teacherId: number,
+  ) {
     return this.classService.create(name, teacherId);
   }
 }

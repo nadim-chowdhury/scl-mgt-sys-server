@@ -14,8 +14,20 @@ export class TimetableService {
     return this.timetableRepository.find();
   }
 
-  create(classId: number, subjectId: number, day: string, startTime: string, endTime: string): Promise<Timetable> {
-    const newTimetable = this.timetableRepository.create({ class: { id: classId }, subject: { id: subjectId }, day, startTime, endTime });
+  create(
+    classId: number,
+    subjectId: number,
+    day: string,
+    startTime: string,
+    endTime: string,
+  ): Promise<Timetable> {
+    const newTimetable = this.timetableRepository.create({
+      class: { id: classId },
+      subject: { id: subjectId },
+      day,
+      startTime,
+      endTime,
+    });
     return this.timetableRepository.save(newTimetable);
   }
 }

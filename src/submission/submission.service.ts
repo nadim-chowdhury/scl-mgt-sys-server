@@ -16,10 +16,11 @@ export class SubmissionService {
     });
   }
 
-  findOne(id: number): Promise<Submission> {
-    return this.submissionRepository.findOne(id, {
-      relations: ['assignment', 'student'],
-    });
+  findOne(id: any): Promise<Submission> {
+    // return this.submissionRepository.findOne(id, {
+    //   relations: ['assignment', 'student'],
+    // });
+    return this.submissionRepository.findOne(id);
   }
 
   create(

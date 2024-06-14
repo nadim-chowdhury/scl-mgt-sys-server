@@ -1,5 +1,6 @@
+import { Course } from 'src/course/course.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Course } from './course.entity';
+// import { Course } from './course.entity';
 
 @Entity()
 export class Assignment {
@@ -15,7 +16,7 @@ export class Assignment {
   @Column()
   dueDate: Date;
 
-  @ManyToOne(() => Course, (course) => course.assignments)
+  @ManyToOne(() => Course, (course: any) => course.assignments)
   course: Course;
 }
 

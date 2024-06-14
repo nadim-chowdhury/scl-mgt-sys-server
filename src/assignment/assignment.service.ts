@@ -14,8 +14,9 @@ export class AssignmentService {
     return this.assignmentRepository.find({ relations: ['course'] });
   }
 
-  findOne(id: number): Promise<Assignment> {
-    return this.assignmentRepository.findOne(id, { relations: ['course'] });
+  findOne(id: any): Promise<Assignment> {
+    // return this.assignmentRepository.findOne(id, { relations: ['course'] });
+    return this.assignmentRepository.findOne(id);
   }
 
   create(

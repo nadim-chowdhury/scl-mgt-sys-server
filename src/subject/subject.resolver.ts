@@ -12,7 +12,10 @@ export class SubjectResolver {
   }
 
   @Mutation(() => Subject)
-  async createSubject(@Args('name') name: string, @Args('classId') classId: number) {
+  async createSubject(
+    @Args('name') name: string,
+    @Args('classId') classId: number,
+  ) {
     return this.subjectService.create(name, classId);
   }
 }
