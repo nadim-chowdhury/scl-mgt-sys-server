@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { User } from './user/user.entity';
 import { ConfigModule } from '@nestjs/config';
+import { Message } from './message/message.entity';
+import { Announcement } from './announcement/announcement.entity';
 
 @Module({
   imports: [
@@ -32,6 +34,7 @@ import { ConfigModule } from '@nestjs/config';
       entities: [User],
       synchronize: true,
     }),
+    TypeOrmModule.forFeature([Message, Announcement]),
     AuthModule,
     StudentModule,
     UserModule,
