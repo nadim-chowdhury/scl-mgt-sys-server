@@ -25,6 +25,7 @@ export class MessageService {
       receiver: { id: receiverId },
       content,
     });
+    console.log('newMessage:', newMessage);
     return this.messageRepository.save(newMessage);
   }
 }
