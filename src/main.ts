@@ -14,6 +14,6 @@ async function bootstrap() {
     credentials: false,
   });
 
-  await app.listen(8000);
+  await app.listen(parseInt(process.env.PORT, 10) || 8000);
 }
 bootstrap();
