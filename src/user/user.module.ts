@@ -6,7 +6,7 @@ import { UserResolver } from './user.resolver';
 import { JwtModule } from '@nestjs/jwt';
 import { GqlAuthGuard } from './guards/gql-auth.guard';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { JwtStrategy } from 'src/jwt.strategy';
+import { JwtStrategy } from 'src/user/jwt.strategy';
 
 @Module({
   imports: [
