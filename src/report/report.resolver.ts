@@ -1,35 +1,25 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { ReportService } from './report.service';
+import { AcademicPerformanceReportDto } from './dto/academic-performance-report.dto';
+import { FinancialReportDto } from './dto/financial-report.dto';
+import { AttendanceReportDto } from './dto/attendance-report.dto';
 
 @Resolver()
 export class ReportResolver {
   constructor(private reportService: ReportService) {}
 
-  @Query(() => [Object])
+  @Query(() => [AcademicPerformanceReportDto])
   async academicPerformanceReport(@Args('courseId') courseId: number) {
     return this.reportService.getAcademicPerformanceReport(courseId);
   }
 
-  @Query(() => [Object])
+  @Query(() => [AttendanceReportDto])
   async attendanceReport() {
     return this.reportService.getAttendanceReport();
   }
 
-  @Query(() => Object)
+  @Query(() => FinancialReportDto)
   async financialReport() {
     return this.reportService.getFinancialReport();
   }
 }
-
-// import { Resolver, Query, Args } from '@nestjs/graphql';
-// import { ReportService } from './report.service';
-
-// @Resolver()
-// export class ReportResolver {
-//   constructor(private reportService: ReportService) {}
-
-//   @Query(() => [Object])
-//   async studentPerformanceReport(@Args('studentId') studentId: number) {
-//     return this.reportService.getStudentPerformanceReport(studentId);
-//   }
-// }

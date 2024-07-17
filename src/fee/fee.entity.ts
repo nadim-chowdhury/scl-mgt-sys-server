@@ -1,21 +1,27 @@
-import { User } from 'src/user/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-// import { User } from './user.entity';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { User } from 'src/user/user.entity';
 
+@ObjectType()
 @Entity()
 export class Fee {
   @PrimaryGeneratedColumn()
+  @Field(() => Int)
   id: number;
 
   @ManyToOne(() => User, (user: any) => user.fees)
+  @Field(() => User)
   user: User;
 
   @Column()
+  @Field(() => Float)
   amount: number;
 
   @Column()
+  @Field()
   dueDate: Date;
 
   @Column()
-  status: string; // Pending, Paid, Overdue
+  @Field()
+  status: string;
 }

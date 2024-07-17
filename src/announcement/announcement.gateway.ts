@@ -19,11 +19,11 @@ export class AnnouncementGateway
 
   constructor(private readonly announcementService: AnnouncementService) {}
 
-  async handleConnection(socket: Socket) {
+  handleConnection(socket: Socket) {
     console.log(`Client connected: ${socket.id}`);
   }
 
-  async handleDisconnect(socket: Socket) {
+  handleDisconnect(socket: Socket) {
     console.log(`Client disconnected: ${socket.id}`);
   }
 

@@ -50,16 +50,17 @@ type Student {
 }
 
 type Attendance {
-  id: Float!
-  date: String!
+  id: Int!
   student: Student!
-  studentId: Float!
+  class: Class!
+  date: DateTime!
+  status: String!
 }
 
 type Subject {
   id: Int!
   name: String!
-  class: Class!
+  class: Class
 }
 
 type Timetable {
@@ -71,28 +72,150 @@ type Timetable {
   endTime: String!
 }
 
+type Announcement {
+  id: Int!
+  title: String!
+  content: String!
+  createdAt: DateTime!
+}
+
+type Submission {
+  id: Int!
+  content: String!
+  grade: Float
+  feedback: String
+  assignment: Assignment!
+  student: Student!
+}
+
+type Fee {
+  id: Int!
+  user: User!
+  amount: Float!
+  dueDate: DateTime!
+  status: String!
+}
+
+type Payment {
+  id: Int!
+  fee: Fee!
+  amount: Float!
+  paymentDate: DateTime!
+  method: String!
+}
+
+type Report {
+  id: Int!
+  title: String!
+  description: String
+  course: Course
+  assignments: [Assignment!]
+  submissions: [Submission!]
+  fees: [Fee!]
+  payments: [Payment!]
+  attendances: [Attendance!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Course {
+  id: Int!
+  title: String!
+  description: String!
+  assignments: [Assignment!]
+  reports: [Report!]
+}
+
+type Assignment {
+  id: Int!
+  title: String!
+  description: String!
+  dueDate: DateTime!
+  course: Course!
+  submissions: Submission
+  report: Report
+}
+
+type Invoice {
+  id: Int!
+  user: User!
+  amount: Float!
+  generatedAt: DateTime!
+  payment: Payment!
+}
+
+type AcademicPerformanceReportDto {
+  assignmentTitle: String!
+  submissions: Int!
+  averageScore: Float!
+}
+
+type FinancialReportDto {
+  totalFees: Float!
+  totalPayments: Float!
+  outstandingAmount: Float!
+}
+
+type AttendanceReportDto {
+  student: String!
+  class: String!
+  date: String!
+  status: String!
+}
+
+type VirtualClass {
+  id: Int!
+  meetingLink: String!
+  schedule: DateTime!
+  course: Course!
+}
+
 type Query {
-  profile(username: String!): User!
+  announcements: [Announcement!]!
+  assignments: [Assignment!]!
+  attendances: [Attendance!]!
   classes: [Class!]!
   teachers: [Teacher!]!
   teacher(id: Float!): Teacher!
+  courses: [Course!]!
+  fees: [Fee!]!
+  invoices: [Invoice!]!
+  messages: [Message!]!
+  payments: [Payment!]!
+  academicPerformanceReport(courseId: Float!): [AcademicPerformanceReportDto!]!
+  attendanceReport: [AttendanceReportDto!]!
+  financialReport: FinancialReportDto!
   students: [Student!]!
   subjects: [Subject!]!
+  submissions: [Submission!]!
   timetables: [Timetable!]!
-  attendances: [Attendance!]!
-  messages: [Message!]!
+  profile(username: String!): User!
+  virtualClasses: [VirtualClass!]!
 }
 
 type Mutation {
+  createAnnouncement(title: String!, content: String!): Announcement!
+  createAssignment(title: String!, description: String!, dueDate: String!, courseId: Float!): Assignment!
+  gradeSubmission(submissionId: Float!, grade: Float!, feedback: String!): Assignment!
+  createAttendance(studentId: Float!, date: String!, status: String!): Attendance!
   register(createUserInput: CreateUserInput!): User!
   login(loginInput: LoginInput!): String!
   createClass(name: String!, teacherId: Float!): Class!
   createTeacher(username: String!): Teacher!
+  createCourse(title: String!, description: String!): Course!
+  sendEmail(to: String!, subject: String!, text: String!): Boolean!
+  logEmail(to: String!, subject: String!, text: String!): Boolean!
+  createFee(userId: Float!, amount: Float!, dueDate: String!): Fee!
+  updateFeeStatus(id: Float!, status: String!): Fee!
+  createInvoice(userId: Float!, paymentId: Float!, amount: Float!): Invoice!
+  createMessage(senderId: Float!, receiverId: Float!, content: String!): Message!
+  createPayment(feeId: Float!, amount: Float!, method: String!): Payment!
   createStudent(name: String!, age: Float!): Student!
   createSubject(name: String!, classId: Float!): Subject!
+  createSubmission(content: String!, assignmentId: Float!, studentId: Float!): Submission!
   createTimetable(classId: Float!, subjectId: Float!, day: String!, startTime: String!, endTime: String!): Timetable!
-  createAttendance(studentId: Float!, date: String!): Attendance!
-  createMessage(senderId: Float!, receiverId: Float!, content: String!): Message!
+  createVirtualClass(meetingLink: String!, schedule: String!, courseId: Float!): VirtualClass!
+  updateSchedule(id: Float!, schedule: String!): VirtualClass!
 }
 
 input CreateUserInput {

@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Subject } from './subject.entity'; // Adjust the import path as per your project structure
+import { Subject } from './subject.entity'; 
 import { SubjectResolver } from './subject.resolver';
 import { SubjectService } from './subject.service';
 

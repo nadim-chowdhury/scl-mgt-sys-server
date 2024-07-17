@@ -1,30 +1,28 @@
-import {
-  Entity,
-  Column,
-  PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
-} from 'typeorm';
-import { Field, ObjectType } from '@nestjs/graphql';
-import { Student } from '../student/student.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Class } from 'src/class/class.entity';
+import { Student } from 'src/student/student.entity';
 
 @ObjectType()
 @Entity()
 export class Attendance {
   @PrimaryGeneratedColumn()
-  @Field()
+  @Field(() => Int)
   id: number;
 
-  @Column()
-  @Field()
-  date: string;
-
   @ManyToOne(() => Student, (student) => student.attendances)
-  @JoinColumn({ name: 'studentId' })
   @Field(() => Student)
   student: Student;
 
+  @ManyToOne(() => Class, (classEntity: any) => classEntity.attendances)
+  @Field(() => Class)
+  class: Class;
+
   @Column()
   @Field()
-  studentId: number;
+  date: Date;
+
+  @Column()
+  @Field()
+  status: string;
 }

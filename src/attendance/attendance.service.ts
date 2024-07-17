@@ -13,14 +13,18 @@ export class AttendanceService {
     private readonly studentRepository: Repository<Student>,
   ) {}
 
-  async createAttendance(studentId: number, date: string): Promise<Attendance> {
+  async createAttendance(
+    studentId: number,
+    date: string,
+    status: string,
+  ): Promise<Attendance> {
     const student = await this.studentRepository.findOneOrFail({
       where: { id: studentId },
     });
     const newAttendance = this.attendanceRepository.create({
       student,
       date,
-      studentId,
+      status,
     });
     return this.attendanceRepository.save(newAttendance);
   }

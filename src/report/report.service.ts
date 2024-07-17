@@ -1,18 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Assignment } from 'src/assignment/assignment.entity';
 import { Attendance } from 'src/attendance/attendance.entity';
 import { Course } from 'src/course/course.entity';
 import { Fee } from 'src/fee/fee.entity';
 import { Payment } from 'src/payment/payment.entity';
 import { Submission } from 'src/submission/submission.entity';
-import { Repository } from 'typeorm';
-// import { Course } from './course.entity';
-// import { Assignment } from './assignment.entity';
-// import { Submission } from './submission.entity';
-// import { Fee } from './fee.entity';
-// import { Payment } from './payment.entity';
-// import { Attendance } from './attendance.entity';
 
 @Injectable()
 export class ReportService {
@@ -32,17 +26,19 @@ export class ReportService {
   ) {}
 
   async getAcademicPerformanceReport(courseId: any) {
-    // const course = await this.courseRepository.findOne(courseId, {
-    //   relations: ['assignments', 'assignments.submissions'],
-    // });
     const course = await this.courseRepository.findOne(courseId);
+    if (!course) {
+      throw new Error('Course not found');
+    }
+
     const report = course.assignments.map((assignment: any) => ({
       assignmentTitle: assignment.title,
       submissions: assignment.submissions.length,
       averageScore:
-        assignment.submissions.reduce((acc, sub) => acc + sub.score, 0) /
-        assignment.submissions.length,
+        assignment.submissions.reduce((acc, sub) => acc + (sub.grade || 0), 0) /
+        (assignment.submissions.length || 1),
     }));
+
     return report;
   }
 
@@ -78,30 +74,3 @@ export class ReportService {
     };
   }
 }
-
-// import { Injectable } from '@nestjs/common';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { Repository } from 'typeorm';
-// import { Submission } from './submission.entity';
-// import { User } from './user.entity';
-
-// @Injectable()
-// export class ReportService {
-//   constructor(
-//     @InjectRepository(Submission)
-//     private submissionRepository: Repository<Submission>,
-//     @InjectRepository(User)
-//     private userRepository: Repository<User>,
-//   ) {}
-
-//   async getStudentPerformanceReport(studentId: number) {
-//     const student = await this.userRepository.findOne(studentId, {
-//       relations: ['submissions', 'submissions.assignment'],
-//     });
-//     const report = student.submissions.map((submission) => ({
-//       assignmentTitle: submission.assignment.title,
-//       grade: submission.grade,
-//     }));
-//     return report;
-//   }
-// }

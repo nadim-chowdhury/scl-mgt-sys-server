@@ -13,7 +13,6 @@ import { TeacherModule } from './teacher/teacher.module';
 import { StudentModule } from './student/student.module';
 import { User } from './user/user.entity';
 import { Message } from './message/message.entity';
-import { Announcement } from './announcement/announcement.entity';
 import { Teacher } from './teacher/teacher.entity';
 import { Class } from './class/class.entity';
 import { SubjectModule } from './subject/subject.module';
@@ -24,6 +23,27 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { Attendance } from './attendance/attendance.entity';
 import { Student } from './student/student.entity';
 import { MessageModule } from './message/message.module';
+import { Announcement } from './announcement/announcement.entity';
+import { AuthUser } from './auth/auth-user.entity';
+import { AnnouncementModule } from './announcement/announcement.module';
+import { AssignmentModule } from './assignment/assignment.module';
+import { SubmissionModule } from './submission/submission.module';
+import { Assignment } from './assignment/assignment.entity';
+import { Submission } from './submission/submission.entity';
+import { Course } from './course/course.entity';
+import { CourseModule } from './course/course.module';
+import { EmailModule } from './email/email.module';
+import { Email } from './email/email.entity';
+import { Fee } from './fee/fee.entity';
+import { FeeModule } from './fee/fee.module';
+import { Invoice } from './invoice/invoice.entity';
+import { InvoiceModule } from './invoice/invoice.module';
+import { Payment } from './payment/payment.entity';
+import { PaymentModule } from './payment/payment.module';
+import { ReportModule } from './report/report.module';
+import { Report } from './report/report.entity';
+import { VirtualClass } from './virtual-class/virtual-class.entity';
+import { VirtualClassModule } from './virtual-class/virtual-class.module';
 
 @Module({
   imports: [
@@ -45,27 +65,47 @@ import { MessageModule } from './message/message.module';
         rejectUnauthorized: false,
       },
       entities: [
-        User,
-        Teacher,
-        Class,
-        Subject,
-        Timetable,
-        Student,
+        Announcement,
+        Assignment,
         Attendance,
+        AuthUser,
+        Class,
+        Course,
+        Email,
+        Fee,
+        Invoice,
         Message,
-        // Announcement,
+        Payment,
+        Report,
+        Student,
+        Subject,
+        Submission,
+        Teacher,
+        Timetable,
+        User,
+        VirtualClass,
       ],
       synchronize: true,
     }),
+    AnnouncementModule,
+    AssignmentModule,
+    AttendanceModule,
     AuthModule,
-    UserModule,
     ClassModule,
-    TeacherModule,
+    CourseModule,
+    EmailModule,
+    FeeModule,
+    InvoiceModule,
+    MessageModule,
+    PaymentModule,
+    ReportModule,
     StudentModule,
     SubjectModule,
+    SubmissionModule,
+    TeacherModule,
     TimetableModule,
-    AttendanceModule,
-    MessageModule,
+    UserModule,
+    VirtualClassModule,
   ],
   controllers: [AppController],
   providers: [AppService],

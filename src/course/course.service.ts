@@ -15,12 +15,11 @@ export class CourseService {
   }
 
   findOne(id: any): Promise<Course> {
-    // return this.courseRepository.findOne(id, { relations: ['assignments'] });
     return this.courseRepository.findOne(id);
   }
 
-  create(name: string, description: string): Promise<Course> {
-    const newCourse = this.courseRepository.create({ name, description });
+  create(title: string, description: string): Promise<Course> {
+    const newCourse = this.courseRepository.create({ title, description });
     return this.courseRepository.save(newCourse);
   }
 }

@@ -15,7 +15,6 @@ export class FeeService {
   }
 
   findOne(id: any): Promise<Fee> {
-    // return this.feeRepository.findOne(id, { relations: ['user'] });
     return this.feeRepository.findOne(id);
   }
 

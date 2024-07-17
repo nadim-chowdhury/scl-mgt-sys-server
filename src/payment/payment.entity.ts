@@ -1,3 +1,4 @@
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 import { Fee } from 'src/fee/fee.entity';
 import {
   Entity,
@@ -6,22 +7,27 @@ import {
   ManyToOne,
   CreateDateColumn,
 } from 'typeorm';
-// import { Fee } from './fee.entity';
 
+@ObjectType()
 @Entity()
 export class Payment {
   @PrimaryGeneratedColumn()
+  @Field(() => Int)
   id: number;
 
   @ManyToOne(() => Fee, (fee: any) => fee.payments)
+  @Field(() => Fee)
   fee: Fee;
 
   @Column()
+  @Field(() => Float)
   amount: number;
 
   @CreateDateColumn()
+  @Field()
   paymentDate: Date;
 
   @Column()
-  method: string; // e.g., Credit Card, Bank Transfer
+  @Field()
+  method: string;
 }

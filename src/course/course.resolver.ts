@@ -13,9 +13,9 @@ export class CourseResolver {
 
   @Mutation(() => Course)
   async createCourse(
-    @Args('name') name: string,
+    @Args('title') title: string,
     @Args('description') description: string,
   ) {
-    return this.courseService.create(name, description);
+    return this.courseService.create(title, description);
   }
 }

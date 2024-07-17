@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { Class } from 'src/class/class.entity'; // Adjust the import path as per your project structure
+import { Class } from 'src/class/class.entity';
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 
 @Entity()
-@ObjectType() // Decorate the class with @ObjectType() decorator
+@ObjectType()
 export class Subject {
   @Field(() => Int)
   @PrimaryGeneratedColumn()
@@ -13,8 +13,7 @@ export class Subject {
   @Column()
   name: string;
 
-  @Field(() => Class) // Specify the GraphQL type explicitly
+  @Field(() => Class, { nullable: true })
   @ManyToOne(() => Class, (cls: any) => cls.subjects)
-  // @ManyToOne(() => Class, { cascade: true })
   class: Class;
 }

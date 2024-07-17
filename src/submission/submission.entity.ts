@@ -1,51 +1,32 @@
-import { Assignment } from 'src/assignment/assignment.entity';
-import { User } from 'src/user/user.entity';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-// import { Assignment } from './assignment.entity';
-// import { User } from './user.entity';
+import { Assignment } from 'src/assignment/assignment.entity';
+import { Student } from 'src/student/student.entity';
 
+@ObjectType()
 @Entity()
 export class Submission {
   @PrimaryGeneratedColumn()
+  @Field(() => Int)
   id: number;
 
-  @ManyToOne(() => Assignment, (assignment: any) => assignment.submissions)
-  assignment: Assignment;
-
-  @ManyToOne(() => User, (user: any) => user.submissions)
-  student: User;
-
   @Column()
+  @Field()
   content: string;
 
-  @Column()
-  submittedAt: Date;
+  @Column({ nullable: true })
+  @Field(() => Float, { nullable: true })
+  grade: number;
+
+  @Column({ nullable: true })
+  @Field({ nullable: true })
+  feedback: string;
+
+  @ManyToOne(() => Assignment, (assignment) => assignment.submissions)
+  @Field(() => Assignment)
+  assignment: Assignment;
+
+  @ManyToOne(() => Student, (student: any) => student.submissions)
+  @Field(() => Student)
+  student: Student;
 }
-
-// import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-// import { Assignment } from './assignment.entity';
-// import { User } from './user.entity';
-
-// @Entity()
-// export class Submission {
-//   @PrimaryGeneratedColumn()
-//   id: number;
-
-//   @ManyToOne(() => Assignment, (assignment) => assignment.submissions)
-//   assignment: Assignment;
-
-//   @ManyToOne(() => User, (user) => user.submissions)
-//   student: User;
-
-//   @Column()
-//   content: string;
-
-//   @Column({ nullable: true })
-//   grade: number;
-
-//   @Column({ nullable: true })
-//   feedback: string;
-
-//   @Column()
-//   submittedAt: Date;
-// }

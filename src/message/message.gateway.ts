@@ -3,7 +3,6 @@ import {
   WebSocketServer,
   SubscribeMessage,
   MessageBody,
-  ConnectedSocket,
   OnGatewayConnection,
   OnGatewayDisconnect,
 } from '@nestjs/websockets';
@@ -12,7 +11,7 @@ import { MessageService } from './message.service';
 
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:3001', // Replace with your client's origin
+    origin: 'http://localhost:3000',
     methods: ['GET', 'POST'],
     credentials: true,
   },

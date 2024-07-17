@@ -10,8 +10,9 @@ export class AttendanceResolver {
   async createAttendance(
     @Args('studentId') studentId: number,
     @Args('date') date: string,
+    @Args('status') status: string,
   ): Promise<Attendance> {
-    return this.attendanceService.createAttendance(studentId, date);
+    return this.attendanceService.createAttendance(studentId, date, status);
   }
 
   @Query(() => [Attendance])

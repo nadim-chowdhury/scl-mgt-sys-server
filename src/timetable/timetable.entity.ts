@@ -4,7 +4,7 @@ import { Class } from 'src/class/class.entity';
 import { Subject } from 'src/subject/subject.entity';
 
 @Entity()
-@ObjectType() // Decorator for GraphQL schema generation
+@ObjectType()
 export class Timetable {
   @PrimaryGeneratedColumn()
   @Field(() => Number)

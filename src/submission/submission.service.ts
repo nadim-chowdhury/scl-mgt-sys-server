@@ -17,9 +17,6 @@ export class SubmissionService {
   }
 
   findOne(id: any): Promise<Submission> {
-    // return this.submissionRepository.findOne(id, {
-    //   relations: ['assignment', 'student'],
-    // });
     return this.submissionRepository.findOne(id);
   }
 
@@ -30,7 +27,6 @@ export class SubmissionService {
   ): Promise<Submission> {
     const newSubmission = this.submissionRepository.create({
       content,
-      submittedAt: new Date(),
       assignment: { id: assignmentId },
       student: { id: studentId },
     });
