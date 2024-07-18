@@ -7,12 +7,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: [
-      process.env.LOCAL_URL,
-      process.env.LOCAL_URL2,
-      process.env.CLIENT_URL,
-      process.env.SERVER_URL,
-    ],
+    // origin: [
+    //   process.env.LOCAL_URL,
+    //   process.env.LOCAL_URL2,
+    //   process.env.CLIENT_URL,
+    //   process.env.SERVER_URL,
+    // ],
+    origin: '*',
+    credentials: true,
     methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: [
       'Accept',
@@ -21,7 +23,6 @@ async function bootstrap() {
       'X-Requested-With',
       'apollo-require-preflight',
     ],
-    credentials: true,
   });
 
   app.useGlobalPipes(
