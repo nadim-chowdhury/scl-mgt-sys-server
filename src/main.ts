@@ -13,11 +13,19 @@ async function bootstrap() {
       process.env.SERVER_URL,
     ],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-    allowedHeaders:
-      'Content-Type,Authorization,x-apollo-operation-name,apollo-require-preflight',
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'x-apollo-operation-name',
+      'apollo-require-preflight',
+    ].join(','),
     credentials: false,
   });
 
-  await app.listen(parseInt(process.env.PORT, 10) || 8000);
+  const port = parseInt(process.env.PORT, 10) || 8000;
+  await app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
 }
+
 bootstrap();
