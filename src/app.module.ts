@@ -53,7 +53,7 @@ import { VirtualClassModule } from './virtual-class/virtual-class.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      csrfPrevention: true,
+      csrfPrevention: false,
     }),
     TypeOrmModule.forRoot({
       type: 'postgres',
