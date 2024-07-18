@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import 'dotenv/config';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,15 +13,23 @@ async function bootstrap() {
       process.env.CLIENT_URL,
       process.env.SERVER_URL,
     ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: ['GET', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: [
-      'Content-Type',
+      'Accept',
       'Authorization',
-      'x-apollo-operation-name',
+      'Content-Type',
+      'X-Requested-With',
       'apollo-require-preflight',
-    ].join(','),
-    credentials: false,
+    ],
+    credentials: true,
   });
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+    }),
+  );
 
   const port = parseInt(process.env.PORT, 10) || 8000;
   await app.listen(port, () => {
