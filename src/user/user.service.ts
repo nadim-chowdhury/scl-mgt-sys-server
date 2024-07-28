@@ -12,23 +12,23 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async findOne(username: string): Promise<User | undefined> {
-    return this.userRepository.findOne({ where: { username } });
+  async findOne(email: string): Promise<User | undefined> {
+    return this.userRepository.findOne({ where: { email } });
   }
 
   async createUser(createUserInput: CreateUserInput): Promise<User> {
-    const { username, password, role } = createUserInput;
+    const { email, password, role } = createUserInput;
     const hashedPassword = await bcrypt.hash(password, 10);
     const newUser = this.userRepository.create({
-      username,
+      email,
       password: hashedPassword,
       role,
     });
     return this.userRepository.save(newUser);
   }
 
-  async validateUser(username: string, password: string): Promise<User | null> {
-    const user = await this.findOne(username);
+  async validateUser(email: string, password: string): Promise<User | null> {
+    const user = await this.findOne(email);
     if (user && (await bcrypt.compare(password, user.password))) {
       return user;
     }

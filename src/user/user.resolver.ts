@@ -22,10 +22,10 @@ export class UserResolver {
 
   @Mutation(() => String)
   async login(@Args('loginInput') loginInput: LoginInput): Promise<string> {
-    const { username, password } = loginInput;
-    const user = await this.userService.validateUser(username, password);
+    const { email, password } = loginInput;
+    const user = await this.userService.validateUser(email, password);
     if (user) {
-      const payload = { username: user.username, sub: user.id };
+      const payload = { email: user.email, sub: user.id };
       return this.jwtService.sign(payload);
     }
     throw new Error('Invalid credentials');
@@ -33,7 +33,7 @@ export class UserResolver {
 
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
-  async profile(@Args('username') username: string): Promise<User | undefined> {
-    return this.userService.findOne(username);
+  async profile(@Args('email') email: string): Promise<User | undefined> {
+    return this.userService.findOne(email);
   }
 }

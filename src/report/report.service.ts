@@ -25,12 +25,14 @@ export class ReportService {
     private attendanceRepository: Repository<Attendance>,
   ) {}
 
-  async getAcademicPerformanceReport(courseId: any) {
-    const course = await this.courseRepository.findOne(courseId);
+  async getAcademicPerformanceReport(courseId: number) {
+    const course = await this.courseRepository.findOne({
+      where: { id: courseId },
+      relations: ['assignments', 'assignments.submissions'],
+    });
     if (!course) {
       throw new Error('Course not found');
     }
-
     const report = course.assignments.map((assignment: any) => ({
       assignmentTitle: assignment.title,
       submissions: assignment.submissions.length,

@@ -2,14 +2,6 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AuthUser {
-  id: Int!
-  name: String!
-  role: String!
-  email: String!
-  password: String!
-}
-
 type Message {
   id: Float!
   sender: User!
@@ -25,7 +17,7 @@ scalar DateTime
 
 type User {
   id: ID!
-  username: String!
+  email: String!
   password: String!
   role: String!
 }
@@ -189,7 +181,7 @@ type Query {
   subjects: [Subject!]!
   submissions: [Submission!]!
   timetables: [Timetable!]!
-  profile(username: String!): User!
+  profile(email: String!): User!
   virtualClasses: [VirtualClass!]!
 }
 
@@ -198,8 +190,6 @@ type Mutation {
   createAssignment(title: String!, description: String!, dueDate: String!, courseId: Float!): Assignment!
   gradeSubmission(submissionId: Float!, grade: Float!, feedback: String!): Assignment!
   createAttendance(studentId: Float!, date: String!, status: String!): Attendance!
-  register(createUserInput: CreateUserInput!): User!
-  login(loginInput: LoginInput!): String!
   createClass(name: String!, teacherId: Float!): Class!
   createTeacher(username: String!): Teacher!
   createCourse(title: String!, description: String!): Course!
@@ -214,17 +204,19 @@ type Mutation {
   createSubject(name: String!, classId: Float!): Subject!
   createSubmission(content: String!, assignmentId: Float!, studentId: Float!): Submission!
   createTimetable(classId: Float!, subjectId: Float!, day: String!, startTime: String!, endTime: String!): Timetable!
+  register(createUserInput: CreateUserInput!): User!
+  login(loginInput: LoginInput!): String!
   createVirtualClass(meetingLink: String!, schedule: String!, courseId: Float!): VirtualClass!
   updateSchedule(id: Float!, schedule: String!): VirtualClass!
 }
 
 input CreateUserInput {
-  username: String!
+  email: String!
   password: String!
   role: String!
 }
 
 input LoginInput {
-  username: String!
+  email: String!
   password: String!
 }

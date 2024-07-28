@@ -6,7 +6,7 @@ import { join } from 'path';
 import { ApolloDriverConfig, ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
+// import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
 import { ClassModule } from './class/class.module';
 import { TeacherModule } from './teacher/teacher.module';
@@ -24,7 +24,7 @@ import { Attendance } from './attendance/attendance.entity';
 import { Student } from './student/student.entity';
 import { MessageModule } from './message/message.module';
 import { Announcement } from './announcement/announcement.entity';
-import { AuthUser } from './auth/auth-user.entity';
+// import { AuthUser } from './auth/auth-user.entity';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { AssignmentModule } from './assignment/assignment.module';
 import { SubmissionModule } from './submission/submission.module';
@@ -69,7 +69,7 @@ import { VirtualClassModule } from './virtual-class/virtual-class.module';
         Announcement,
         Assignment,
         Attendance,
-        AuthUser,
+        // AuthUser,
         Class,
         Course,
         Email,
@@ -91,7 +91,7 @@ import { VirtualClassModule } from './virtual-class/virtual-class.module';
     AnnouncementModule,
     AssignmentModule,
     AttendanceModule,
-    AuthModule,
+    // AuthModule,
     ClassModule,
     CourseModule,
     EmailModule,

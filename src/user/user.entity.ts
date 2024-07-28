@@ -11,7 +11,7 @@ export class User {
 
   @Field()
   @Column()
-  username: string;
+  email: string;
 
   @Field()
   @Column()
