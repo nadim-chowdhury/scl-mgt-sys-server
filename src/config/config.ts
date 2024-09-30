@@ -4,5 +4,5 @@ export default () => ({
     host: process.env.DATABASE_HOST,
     port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
   },
-  jwtSecret: process.env.JWT_SECRET || 'YOUR_SECRET_KEY',
+  jwtSecret: process.env.JWT_SECRET,
 });
