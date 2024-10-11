@@ -76,10 +76,8 @@ async function bootstrap() {
   // const swaggerDocument = SwaggerModule.createDocument(app, swaggerConfig);
   // SwaggerModule.setup('api/docs', app, swaggerDocument);
 
-  // Listen on the port defined in the environment or default to 8000
-  const port = process.env.PORT || 8000;
-  await app.listen(port);
-  console.log(`Application is running on: ${await app.getUrl()}`);
+  // Listen on a port (default to 8000 if not provided in environment variables)
+  await app.listen(process.env.PORT || 8000);
 }
 
 // Bootstrap the application
