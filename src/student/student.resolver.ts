@@ -2,7 +2,8 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { StudentService } from './student.service';
 import { Student } from './student.entity';
-import { RolesGuard } from 'src/user/roles.gurd';
+import { RolesGuard } from '../user/roles.gurd';
+// import { RolesGuard } from 'src/user/roles.gurd';
 
 @Resolver(() => Student)
 export class StudentResolver {
