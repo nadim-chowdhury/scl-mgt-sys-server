@@ -49,7 +49,7 @@ export class ReportService {
       relations: ['student', 'class'],
     });
     const report = attendances.map((attendance: any) => ({
-      student: attendance.student.username,
+      student: attendance.student.email,
       class: attendance.class.name,
       date: attendance.date,
       status: attendance.status,

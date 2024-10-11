@@ -17,7 +17,7 @@ export class TeacherResolver {
   }
 
   @Mutation(() => Teacher)
-  async createTeacher(@Args('username') username: string) {
-    return this.teacherService.create(username);
+  async createTeacher(@Args('email') email: string) {
+    return this.teacherService.create(email);
   }
 }

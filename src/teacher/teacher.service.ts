@@ -21,8 +21,8 @@ export class TeacherService {
     });
   }
 
-  async create(username: string): Promise<Teacher> {
-    const newTeacher = this.teacherRepository.create({ username });
+  async create(email: string): Promise<Teacher> {
+    const newTeacher = this.teacherRepository.create({ email });
     return this.teacherRepository.save(newTeacher);
   }
 }

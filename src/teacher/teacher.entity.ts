@@ -11,7 +11,7 @@ export class Teacher {
 
   @Field()
   @Column()
-  username: string;
+  email: string;
 
   @Field(() => [Class])
   @OneToMany(() => Class, (classEntity) => classEntity.teacher)

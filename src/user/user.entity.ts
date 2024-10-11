@@ -13,17 +13,19 @@ export class User {
   @Column()
   email: string;
 
-  @Field()
+  // Do not expose the password field in GraphQL for security reasons
   @Column()
   password: string;
 
-  @Field()
-  @Column()
-  role: string;
+  @Field({ nullable: true }) // Mark as nullable in GraphQL if it can be missing
+  @Column({ nullable: true }) // Allow null values in the database if necessary
+  role?: string;
 
+  @Field(() => [Message]) // Expose sent messages in the GraphQL schema
   @OneToMany(() => Message, (message) => message.sender)
   sentMessages: Message[];
 
+  @Field(() => [Message]) // Expose received messages in the GraphQL schema
   @OneToMany(() => Message, (message) => message.receiver)
   receivedMessages: Message[];
 }
