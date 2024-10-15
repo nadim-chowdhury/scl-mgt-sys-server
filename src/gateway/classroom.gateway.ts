@@ -9,7 +9,21 @@ import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
-    origin: '*', // Adjust based on your needs
+    origin: (origin, callback) => {
+      // Allow specific origins (add your own list of allowed origins)
+      const allowedOrigins = [
+        'http://localhost:3000',
+        'http://127.0.0.1:3000',
+        'https://scl-mgt-sys-client.vercel.app',
+        'https://scl-mgt-sys-server.vercel.app',
+      ];
+
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the origin
+      } else {
+        callback(new Error('Not allowed by CORS')); // Reject other origins
+      }
+    },
     methods: ['GET', 'POST'],
     credentials: true,
     transports: ['websocket', 'polling'],
