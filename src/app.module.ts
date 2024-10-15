@@ -44,7 +44,7 @@ import { Invoice } from './invoice/invoice.entity';
 import { Payment } from './payment/payment.entity';
 import { Report } from './report/report.entity';
 import { VirtualClass } from './virtual-class/virtual-class.entity';
-import { SignalingGateway } from './gateway/signaling.gateway';
+import { ClassroomGateway } from './gateway/classroom.gateway';
 
 // Uncomment the following when AuthModule and AuthUser entity are implemented
 // import { AuthModule } from './auth/auth.module';
@@ -115,6 +115,6 @@ import { SignalingGateway } from './gateway/signaling.gateway';
     VirtualClassModule,
   ],
   controllers: [AppController],
-  providers: [AppService, SignalingGateway],
+  providers: [AppService, ClassroomGateway],
 })
 export class AppModule {}
