@@ -10,7 +10,7 @@ import { Server, Socket } from 'socket.io';
     origin: process.env.CLIENT_WEBSOCKET_URL || '*', // Use the client URL or allow any origin
     methods: ['GET', 'POST'], // Allow GET and POST methods for CORS
     credentials: true, // Include credentials if necessary
-    transports: ['websocket', 'polling'],
+    transports: ['websocket'],
   },
 })
 export class SignalingGateway {
